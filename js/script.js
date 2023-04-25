@@ -1,15 +1,21 @@
+const body = document.querySelector('body');
+
 function createPage() {
   function createHeader() {
-    const body = document.querySelector('body');
     const header = document.createElement('header');
+    const container = document.createElement('div');
     const heading = document.createElement('h1');
+    header.classList.add('header');
+    container.classList.add('container');
+    heading.classList.add('title');
     heading.innerText = 'Virtual keyboard';
     body.appendChild(header);
-    header.appendChild(heading);
+    header.appendChild(container);
+    container.appendChild(heading);
   }
   function createMain() {
-    const body = document.querySelector('body');
     const main = document.createElement('main');
+    const container = document.createElement('container');
     const textArea = document.createElement('textarea');
     const keyboard = document.createElement('div');
     const firstRowKeys = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'];
@@ -18,8 +24,9 @@ function createPage() {
     const fourthRowKeys = ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '▲', 'Shift'];
     const fifthRowKeys = ['Ctrl', 'Win', 'Alt', ' ', '◄', '▼', '►', 'Ctrl'];
     body.appendChild(main);
-    main.appendChild(textArea);
-    main.appendChild(keyboard);
+    main.appendChild(container);
+    container.appendChild(textArea);
+    container.appendChild(keyboard);
     function createKeyboard() {
       function createRow(addRow, rowKeys) {
         rowKeys.forEach((item) => {
