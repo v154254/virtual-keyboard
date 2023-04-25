@@ -4,18 +4,18 @@ function createPage() {
   function createHeader() {
     const header = document.createElement('header');
     const container = document.createElement('div');
-    const heading = document.createElement('h1');
+    const title = document.createElement('h1');
     header.classList.add('header');
     container.classList.add('container');
-    heading.classList.add('title');
-    heading.innerText = 'Virtual keyboard';
+    title.classList.add('title');
+    title.innerText = 'Virtual keyboard';
     body.appendChild(header);
     header.appendChild(container);
-    container.appendChild(heading);
+    container.appendChild(title);
   }
   function createMain() {
     const main = document.createElement('main');
-    const container = document.createElement('container');
+    const container = document.createElement('div');
     const textArea = document.createElement('textarea');
     const keyboard = document.createElement('div');
     const firstRowKeys = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'];
@@ -23,6 +23,10 @@ function createPage() {
     const thirdRowKeys = ['Caps Lock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter'];
     const fourthRowKeys = ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '▲', 'Shift'];
     const fifthRowKeys = ['Ctrl', 'Win', 'Alt', ' ', '◄', '▼', '►', 'Ctrl'];
+    main.classList.add('main');
+    container.classList.add('container');
+    textArea.classList.add('main__textarea');
+    keyboard.classList.add('keyboard');
     body.appendChild(main);
     main.appendChild(container);
     container.appendChild(textArea);
@@ -31,12 +35,14 @@ function createPage() {
       function createRow(addRow, rowKeys) {
         rowKeys.forEach((item) => {
           const key = document.createElement('div');
+          key.classList.add('key', `${item}`);
           key.innerText = `${item}`;
           addRow.appendChild(key);
         });
       }
       for (let i = 0; i < 5; i += 1) {
         const row = document.createElement('div');
+        row.classList.add('row');
         switch (i) {
           case 0:
             keyboard.appendChild(row);
