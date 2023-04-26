@@ -1,5 +1,3 @@
-const body = document.querySelector('body');
-
 function createPage() {
   function createHeader() {
     const header = document.createElement('header');
@@ -9,7 +7,7 @@ function createPage() {
     container.classList.add('container');
     title.classList.add('title');
     title.innerText = 'Virtual keyboard';
-    body.appendChild(header);
+    document.body.appendChild(header);
     header.appendChild(container);
     container.appendChild(title);
   }
@@ -27,7 +25,7 @@ function createPage() {
     container.classList.add('container');
     textArea.classList.add('main__textarea');
     keyboard.classList.add('keyboard');
-    body.appendChild(main);
+    document.body.appendChild(main);
     main.appendChild(container);
     container.appendChild(textArea);
     container.appendChild(keyboard);
