@@ -20,9 +20,9 @@ function createPage() {
     const keyboard = document.createElement('div');
     const firstRowKeys = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'];
     const secondRowKeys = ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del'];
-    const thirdRowKeys = ['Caps Lock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter'];
+    const thirdRowKeys = ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter'];
     const fourthRowKeys = ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '▲', 'Shift'];
-    const fifthRowKeys = ['Ctrl', 'Win', 'Alt', ' ', '◄', '▼', '►', 'Ctrl'];
+    const fifthRowKeys = ['Ctrl', 'Win', 'Alt', 'Space', 'Alt', '◄', '▼', '►', 'Ctrl'];
     main.classList.add('main');
     container.classList.add('container');
     textArea.classList.add('main__textarea');
