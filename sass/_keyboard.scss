@@ -1,5 +1,5 @@
 .keyboard {
-  width: 704px;
+  width: 904px;
   margin: 0 auto;
   padding: 5px;
   padding-left: 0;
@@ -17,14 +17,14 @@
 }
 
 .key {
-  width: 40px;
+  width: 65px;
   height: 40px;
   margin-left: 6px;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 40px;
   text-align: center;
-  color: #ffffff;
-  background: #444444;
+  background: #ffffff;
+  border: 2px solid #000000;
   border-radius: 3px;
   cursor: pointer;
   user-select: none;
