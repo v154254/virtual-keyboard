@@ -69,7 +69,24 @@ function createPage() {
     }
     createKeyboard();
   }
+  function createFooter() {
+    const footer = document.createElement('footer');
+    const container = document.createElement('div');
+    const description = document.createElement('p');
+    const language = document.createElement('p');
+    footer.classList.add('footer');
+    container.classList.add('container');
+    description.classList.add('description');
+    language.classList.add('language');
+    description.innerText = '⌨️ was made for Windows';
+    language.innerText = 'Press Ctrl + Alt to change language';
+    document.body.appendChild(footer);
+    footer.appendChild(container);
+    container.appendChild(description);
+    container.appendChild(language);
+  }
   createHeader();
   createMain();
+  createFooter();
 }
 window.addEventListener('load', createPage);
