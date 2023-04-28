@@ -5,4 +5,18 @@ module.exports = {
   env: {
     browser: true,
   },
+  overrides: [
+    {
+      files: ['*.js'],
+      rules: {
+        'import/extensions': [
+          'error',
+          'always',
+          {
+            ignorePackages: true,
+          },
+        ],
+      },
+    },
+  ],
 };
