@@ -16,8 +16,8 @@ class Keyboard {
       I: 'Ш',
       O: 'Щ',
       P: 'З',
-      BracketLeft: 'Х',
-      BracketRight: 'Ъ',
+      '{': 'Х',
+      '}': 'Ъ',
       A: 'Ф',
       S: 'Ы',
       D: 'В',
@@ -27,8 +27,8 @@ class Keyboard {
       J: 'О',
       K: 'Л',
       L: 'Д',
-      Semicolon: 'Ж',
-      Quote: 'Э',
+      ':': 'Ж',
+      '"': 'Э',
       Z: 'Я',
       X: 'Ч',
       C: 'С',
@@ -36,22 +36,50 @@ class Keyboard {
       B: 'И',
       N: 'Т',
       M: 'Ь',
-      Comma: 'Б',
-      Period: 'Ю',
-      Slash: ',',
+      '<': 'Б',
+      '>': 'Ю',
+      '?': ',',
     };
   }
 
   identifyKey(event) {
     event.preventDefault();
-    if (event.code.includes('AltLeft')) {
+    if (event.code === 'AltLeft') {
       this.languageKeys.alt = true;
     }
-    if (event.code.includes('ControlLeft')) {
+    if (event.code === 'ControlLeft') {
       this.languageKeys.ctrl = true;
     }
     if (this.languageKeys.alt && this.languageKeys.ctrl) {
       this.switchLanguage();
+    }
+    if (event.code === 'BracketLeft') {
+      this.typeSymbol('{');
+      return;
+    }
+    if (event.code === 'BracketRight') {
+      this.typeSymbol('}');
+      return;
+    }
+    if (event.code === 'Semicolon') {
+      this.typeSymbol(':');
+      return;
+    }
+    if (event.code === 'Quote') {
+      this.typeSymbol('"');
+      return;
+    }
+    if (event.code === 'Comma') {
+      this.typeSymbol('<');
+      return;
+    }
+    if (event.code === 'Period') {
+      this.typeSymbol('>');
+      return;
+    }
+    if (event.code === 'Slash') {
+      this.typeSymbol('?');
+      return;
     }
     this.typeSymbol(event.code.at(-1));
   }
