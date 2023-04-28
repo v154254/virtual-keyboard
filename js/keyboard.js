@@ -6,6 +6,16 @@ class Keyboard {
       alt: false,
     };
     this.upperCase = false;
+    this.shiftIsDown = false;
+    this.specialSymbols = {
+      '[': '{',
+      ']': '}',
+      ';': ':',
+      '\'': '"',
+      ',': '<',
+      '.': '>',
+      '/': '?',
+    };
     this.ruAlphabet = {
       Q: 'Й',
       W: 'Ц',
@@ -50,6 +60,7 @@ class Keyboard {
       8: '8',
       9: '9',
       0: '0',
+      '`': 'Ё',
     };
   }
 
@@ -63,6 +74,13 @@ class Keyboard {
     }
     if (this.languageKeys.alt && this.languageKeys.ctrl) {
       this.switchLanguage();
+    }
+    if (event.code === 'ShiftLeft') {
+      this.toggleUpper();
+      this.shiftIsDown = true;
+    }
+    if (event.code === 'CapsLock') {
+      this.toggleUpper();
     }
     if (event.code === 'BracketLeft') {
       this.typeSymbol('[');
@@ -92,16 +110,31 @@ class Keyboard {
       this.typeSymbol('/');
       return;
     }
+    if (event.code === 'Backquote') {
+      this.typeSymbol('`');
+      return;
+    }
     this.typeSymbol(event.code.at(-1));
   }
 
   typeSymbol(key) {
     this.textarea = document.querySelector('textarea');
     if (this.language === 'ru') {
-      this.textarea.value += this.ruAlphabet[key].toLowerCase();
+      if (this.upperCase === true) {
+        this.textarea.value += this.ruAlphabet[key];
+        return;
+      } this.textarea.value += this.ruAlphabet[key].toLowerCase();
       return;
     }
-    this.textarea.value += key.toLowerCase();
+    if (this.shiftIsDown && Object.keys(this.specialSymbols).includes(key)) {
+      this.textarea.value += this.specialSymbols[key];
+      return;
+    }
+    if (this.upperCase === true) {
+      this.textarea.value += key;
+    } else {
+      this.textarea.value += key.toLowerCase();
+    }
   }
 
   switchLanguage() {
@@ -117,6 +150,10 @@ class Keyboard {
     if (event.code === 'AltLeft' || event.code === 'ControlLeft') {
       this.nullifyLanguageKeys();
     }
+    if (event.code === 'ShiftLeft') {
+      this.shiftIsDown = false;
+      this.toggleUpper();
+    }
   }
 
   nullifyLanguageKeys() {
@@ -124,6 +161,14 @@ class Keyboard {
       ctrl: false,
       alt: false,
     };
+  }
+
+  toggleUpper() {
+    if (this.upperCase) {
+      this.upperCase = false;
+    } else {
+      this.upperCase = true;
+    }
   }
 }
 
