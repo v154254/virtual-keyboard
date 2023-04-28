@@ -82,39 +82,35 @@ class Keyboard {
     if (event.code === 'CapsLock') {
       this.toggleUpper();
     }
-    if (event.code === 'BracketLeft') {
-      this.typeSymbol('[');
-      return;
+    switch (event.code) {
+      case 'BracketLeft':
+        this.typeSymbol('[');
+        break;
+      case 'BracketRight':
+        this.typeSymbol(']');
+        break;
+      case 'Semicolon':
+        this.typeSymbol(';');
+        break;
+      case 'Quote':
+        this.typeSymbol('\'');
+        break;
+      case 'Comma':
+        this.typeSymbol(',');
+        break;
+      case 'Period':
+        this.typeSymbol('.');
+        break;
+      case 'Slash':
+        this.typeSymbol('/');
+        break;
+      case 'Backquote':
+        this.typeSymbol('`');
+        break;
+      default:
+        this.typeSymbol(event.code.at(-1));
+        break;
     }
-    if (event.code === 'BracketRight') {
-      this.typeSymbol(']');
-      return;
-    }
-    if (event.code === 'Semicolon') {
-      this.typeSymbol(';');
-      return;
-    }
-    if (event.code === 'Quote') {
-      this.typeSymbol('\'');
-      return;
-    }
-    if (event.code === 'Comma') {
-      this.typeSymbol(',');
-      return;
-    }
-    if (event.code === 'Period') {
-      this.typeSymbol('.');
-      return;
-    }
-    if (event.code === 'Slash') {
-      this.typeSymbol('/');
-      return;
-    }
-    if (event.code === 'Backquote') {
-      this.typeSymbol('`');
-      return;
-    }
-    this.typeSymbol(event.code.at(-1));
   }
 
   typeSymbol(key) {
