@@ -5,6 +5,7 @@ class Keyboard {
       ctrl: false,
       alt: false,
     };
+    this.upperCase = false;
     this.ruAlphabet = {
       Q: 'Й',
       W: 'Ц',
@@ -16,8 +17,8 @@ class Keyboard {
       I: 'Ш',
       O: 'Щ',
       P: 'З',
-      '{': 'Х',
-      '}': 'Ъ',
+      '[': 'Х',
+      ']': 'Ъ',
       A: 'Ф',
       S: 'Ы',
       D: 'В',
@@ -27,8 +28,8 @@ class Keyboard {
       J: 'О',
       K: 'Л',
       L: 'Д',
-      ':': 'Ж',
-      '"': 'Э',
+      ';': 'Ж',
+      '\'': 'Э',
       Z: 'Я',
       X: 'Ч',
       C: 'С',
@@ -36,9 +37,9 @@ class Keyboard {
       B: 'И',
       N: 'Т',
       M: 'Ь',
-      '<': 'Б',
-      '>': 'Ю',
-      '?': ',',
+      ',': 'Б',
+      '.': 'Ю',
+      '/': ',',
       1: '1',
       2: '2',
       3: '3',
@@ -64,31 +65,31 @@ class Keyboard {
       this.switchLanguage();
     }
     if (event.code === 'BracketLeft') {
-      this.typeSymbol('{');
+      this.typeSymbol('[');
       return;
     }
     if (event.code === 'BracketRight') {
-      this.typeSymbol('}');
+      this.typeSymbol(']');
       return;
     }
     if (event.code === 'Semicolon') {
-      this.typeSymbol(':');
+      this.typeSymbol(';');
       return;
     }
     if (event.code === 'Quote') {
-      this.typeSymbol('"');
+      this.typeSymbol('\'');
       return;
     }
     if (event.code === 'Comma') {
-      this.typeSymbol('<');
+      this.typeSymbol(',');
       return;
     }
     if (event.code === 'Period') {
-      this.typeSymbol('>');
+      this.typeSymbol('.');
       return;
     }
     if (event.code === 'Slash') {
-      this.typeSymbol('?');
+      this.typeSymbol('/');
       return;
     }
     this.typeSymbol(event.code.at(-1));
@@ -97,10 +98,10 @@ class Keyboard {
   typeSymbol(key) {
     this.textarea = document.querySelector('textarea');
     if (this.language === 'ru') {
-      this.textarea.value += this.ruAlphabet[key];
+      this.textarea.value += this.ruAlphabet[key].toLowerCase();
       return;
     }
-    this.textarea.value += key;
+    this.textarea.value += key.toLowerCase();
   }
 
   switchLanguage() {
@@ -111,7 +112,14 @@ class Keyboard {
     }
   }
 
-  identifyKeyUp() {
+  identifyKeyUp(event) {
+    event.preventDefault();
+    if (event.code === 'AltLeft' || event.code === 'ControlLeft') {
+      this.nullifyLanguageKeys();
+    }
+  }
+
+  nullifyLanguageKeys() {
     this.languageKeys = {
       ctrl: false,
       alt: false,
