@@ -52,7 +52,7 @@ class Keyboard {
     };
   }
 
-  identifyKey(event) {
+  identifyKeyDown(event) {
     event.preventDefault();
     if (event.code === 'AltLeft') {
       this.languageKeys.alt = true;
@@ -111,7 +111,7 @@ class Keyboard {
     }
   }
 
-  cancelLangSwitch() {
+  identifyKeyUp() {
     this.languageKeys = {
       ctrl: false,
       alt: false,
