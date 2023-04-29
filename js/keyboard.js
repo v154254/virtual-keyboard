@@ -17,6 +17,35 @@ class Keyboard {
       '.': '>',
       '/': '?',
       '`': '~',
+      1: '!',
+      2: '@',
+      3: '#',
+      4: '$',
+      5: '%',
+      6: '^',
+      7: '&',
+      8: '*',
+      9: '(',
+      0: ')',
+      '-': '_',
+      '=': '+',
+      '\\': '|',
+    };
+    this.specialSymbolsRu = {
+      1: '!',
+      2: '"',
+      3: '№',
+      4: ';',
+      5: '%',
+      6: ':',
+      7: '?',
+      8: '*',
+      9: '(',
+      0: ')',
+      '-': '_',
+      '=': '+',
+      '\\': '/',
+      '/': ',',
     };
     this.ruAlphabet = {
       Q: 'Й',
@@ -51,7 +80,7 @@ class Keyboard {
       M: 'Ь',
       ',': 'Б',
       '.': 'Ю',
-      '/': ',',
+      '/': '.',
       1: '1',
       2: '2',
       3: '3',
@@ -62,6 +91,9 @@ class Keyboard {
       8: '8',
       9: '9',
       0: '0',
+      '-': '-',
+      '=': '=',
+      '\\': '\\',
       '`': 'Ё',
     };
   }
@@ -112,6 +144,15 @@ class Keyboard {
       case 'Backquote':
         this.typeSymbol('`');
         break;
+      case 'Minus':
+        this.typeSymbol('-');
+        break;
+      case 'Equal':
+        this.typeSymbol('=');
+        break;
+      case 'Backslash':
+        this.typeSymbol('\\');
+        break;
       default:
         this.typeSymbol(event.code.at(-1));
         break;
@@ -121,6 +162,10 @@ class Keyboard {
   typeSymbol(key) {
     this.textarea = document.querySelector('textarea');
     if (this.language === 'ru') {
+      if (this.shiftIsDown && Object.keys(this.specialSymbolsRu).includes(key)) {
+        this.textarea.value += this.specialSymbolsRu[key];
+        return;
+      }
       if (this.upperCase === true) {
         this.textarea.value += this.ruAlphabet[key];
         return;
