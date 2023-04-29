@@ -15,6 +15,7 @@ class Keyboard {
       ',': '<',
       '.': '>',
       '/': '?',
+      '`': '~',
     };
     this.ruAlphabet = {
       Q: 'Й',
@@ -81,6 +82,9 @@ class Keyboard {
     }
     if (event.code === 'CapsLock') {
       this.toggleUpper();
+    }
+    if (event.code === 'ControlLeft' || event.code === 'AltLeft') {
+      return;
     }
     switch (event.code) {
       case 'BracketLeft':
