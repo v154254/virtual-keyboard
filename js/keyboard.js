@@ -7,6 +7,7 @@ class Keyboard {
     };
     this.upperCase = false;
     this.shiftIsDown = false;
+    this.specialKeys = ['AltLeft', 'ControlLeft', 'ShiftLeft', 'CapsLock'];
     this.specialSymbols = {
       '[': '{',
       ']': '}',
@@ -83,7 +84,7 @@ class Keyboard {
     if (event.code === 'CapsLock') {
       this.toggleUpper();
     }
-    if (event.code === 'ControlLeft' || event.code === 'AltLeft') {
+    if (this.specialKeys.includes(event.code)) {
       return;
     }
     switch (event.code) {
