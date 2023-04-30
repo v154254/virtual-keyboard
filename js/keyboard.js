@@ -264,6 +264,10 @@ class Keyboard {
     this.changeKeyboardLayout();
   }
 
+  getLanguage() {
+    return this.language;
+  }
+
   identifyKeyUp(event) {
     event.preventDefault();
     if (Object.keys(this.alphabet).includes(event.code.at(-1))) {
