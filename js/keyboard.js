@@ -7,7 +7,7 @@ class Keyboard {
     };
     this.upperCase = false;
     this.shiftIsDown = false;
-    this.specialKeys = ['AltLeft', 'ControlLeft', 'ShiftLeft', 'CapsLock'];
+    this.specialKeys = ['AltLeft', 'ControlLeft', 'ShiftLeft', 'CapsLock', 'MetaLeft', 'ShiftRight', 'AltRight', 'ControlRight'];
     this.alphabet = {
       Q: 'Й',
       W: 'Ц',
