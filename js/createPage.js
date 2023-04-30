@@ -25,16 +25,43 @@ function createMain() {
   container.appendChild(textArea);
   container.appendChild(keyboard);
   function createKeyboard() {
-    const firstRowKeys = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'];
-    const secondRowKeys = ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del'];
-    const thirdRowKeys = ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter'];
-    const fourthRowKeys = ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '▲', 'Shift'];
-    const fifthRowKeys = ['Ctrl', 'Win', 'Alt', 'Space', 'Alt', '◄', '▼', '►', 'Ctrl'];
+    const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const specialCharacters = {
+      Backquote: '`',
+      Minus: '-',
+      Equal: '=',
+      BracketLeft: '[',
+      BracketRight: ']',
+      Backslash: '\\',
+      Semicolon: ';',
+      Quote: '\'',
+      Comma: ',',
+      Period: '.',
+      Slash: '/',
+      ArrowUp: '▲',
+      Space: ' ',
+      ArrowLeft: '◄',
+      ArrowDown: '▼',
+      ArrowRight: '►',
+    };
+    const firstRowKeys = ['Backquote', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Minus', 'Equal', 'Backspace'];
+    const secondRowKeys = ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'BracketLeft', 'BracketRight', 'Backslash', 'Del'];
+    const thirdRowKeys = ['CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Semicolon', 'Quote', 'Enter'];
+    const fourthRowKeys = ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Comma', 'Period', 'Slash', 'ArrowUp', 'Shift'];
+    const fifthRowKeys = ['Ctrl', 'Win', 'Alt', 'Space', 'Alt', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'Ctrl'];
     function createRow(addRow, rowKeys) {
       rowKeys.forEach((item) => {
         const key = document.createElement('div');
-        key.classList.add('key', `${item}`);
-        key.innerText = `${item}`;
+        if (digits.includes(item)) {
+          key.classList.add('key', `d${item}`);
+          key.innerText = `${item}`;
+        } else if (Object.keys(specialCharacters).includes(item)) {
+          key.classList.add('key', `${item}`);
+          key.innerText = `${specialCharacters[item]}`;
+        } else {
+          key.classList.add('key', `${item}`);
+          key.innerText = `${item}`;
+        }
         addRow.appendChild(key);
       });
     }
