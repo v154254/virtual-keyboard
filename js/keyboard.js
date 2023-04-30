@@ -169,10 +169,10 @@ class Keyboard {
         event.preventDefault();
     }
     event.preventDefault();
-    if (event.code === 'AltLeft') {
+    if (event.code === 'AltLeft' || event.code === 'AltRight') {
       this.languageKeys.alt = true;
     }
-    if (event.code === 'ControlLeft') {
+    if (event.code === 'ControlLeft' || event.code === 'ControlRight') {
       this.languageKeys.ctrl = true;
     }
     if (this.languageKeys.alt && this.languageKeys.ctrl) {
