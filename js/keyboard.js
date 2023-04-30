@@ -97,16 +97,9 @@ class Keyboard {
       Digit9: '(',
     };
     this.specialCharactersRu = {
-      Backquote: 'ё',
       Minus: '-',
       Equal: '=',
-      BracketLeft: 'х',
-      BracketRight: 'ъ',
       Backslash: '\\',
-      Semicolon: 'ж',
-      Quote: 'э',
-      Comma: 'б',
-      Period: 'ю',
       Slash: '.',
       ArrowUp: '▲',
       ArrowLeft: '◄',
@@ -115,22 +108,33 @@ class Keyboard {
       Tab: '    ',
     };
     this.specialCharactersShiftRu = {
-      Backquote: 'Ё',
       Minus: '_',
       Equal: '+',
-      BracketLeft: 'Х',
-      BracketRight: 'Ъ',
       Backslash: '/',
-      Semicolon: 'Ж',
-      Quote: 'Э',
-      Comma: 'Б',
-      Period: 'Ю',
       Slash: ',',
       ArrowUp: '▲',
       ArrowLeft: '◄',
       ArrowDown: '▼',
       ArrowRight: '►',
       Tab: '    ',
+    };
+    this.lettersUpperRu = {
+      Backquote: 'Ё',
+      BracketLeft: 'Х',
+      BracketRight: 'Ъ',
+      Semicolon: 'Ж',
+      Quote: 'Э',
+      Comma: 'Б',
+      Period: 'Ю',
+    };
+    this.lettersLowerRu = {
+      Backquote: 'ё',
+      BracketLeft: 'х',
+      BracketRight: 'ъ',
+      Semicolon: 'ж',
+      Quote: 'э',
+      Comma: 'б',
+      Period: 'ю',
     };
     this.numbersShiftRu = {
       Digit0: ')',
@@ -181,6 +185,7 @@ class Keyboard {
     }
     if (event.code === 'CapsLock') {
       this.toggleUpper();
+      this.changeKeyboardLayout();
     }
     if (this.specialKeys.includes(event.code)) {
       return;
@@ -213,14 +218,20 @@ class Keyboard {
       }
     }
     if (this.language === 'ru') {
-      if (Object.keys(this.specialCharacters).includes(key) && !this.shiftIsDown) {
+      if (Object.keys(this.specialCharactersRu).includes(key) && !this.shiftIsDown) {
         this.textarea.setRangeText(this.specialCharactersRu[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
-      } else if (Object.keys(this.specialCharacters).includes(key)) {
+      } else if (Object.keys(this.specialCharactersRu).includes(key)) {
         this.textarea.setRangeText(this.specialCharactersShiftRu[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       } else if (Object.keys(this.numbers).includes(key)) {
         this.textarea.setRangeText(this.numbersShiftRu[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       } else if (this.upperCase) {
-        this.textarea.setRangeText(this.alphabet[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
+        if (Object.keys(this.lettersUpperRu).includes(key)) {
+          this.textarea.setRangeText(this.lettersUpperRu[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
+        } else {
+          this.textarea.setRangeText(this.alphabet[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
+        }
+      } else if (Object.keys(this.lettersLowerRu).includes(key)) {
+        this.textarea.setRangeText(this.lettersLowerRu[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       } else {
         this.textarea.setRangeText(this.alphabet[key].toLowerCase(), this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       }
@@ -284,7 +295,7 @@ class Keyboard {
       if (this.upperCase) {
         Object.keys(this.alphabet).forEach((item) => {
           const key = document.querySelector(`.${item.toLowerCase()}`);
-          key.innerText = item.toUpperCase();
+          key.innerText = item;
         });
       } else {
         Object.keys(this.alphabet).forEach((item) => {
@@ -317,16 +328,24 @@ class Keyboard {
       if (this.upperCase) {
         Object.keys(this.alphabet).forEach((item) => {
           const key = document.querySelector(`.${item.toLowerCase()}`);
-          key.innerText = this.alphabet[item].toUpperCase();
+          key.innerText = this.alphabet[item];
+        });
+        Object.keys(this.lettersUpperRu).forEach((item) => {
+          const key = document.querySelector(`.${item}`);
+          key.innerText = this.lettersUpperRu[item];
         });
       } else {
         Object.keys(this.alphabet).forEach((item) => {
           const key = document.querySelector(`.${item.toLowerCase()}`);
           key.innerText = this.alphabet[item].toLowerCase();
         });
+        Object.keys(this.lettersLowerRu).forEach((item) => {
+          const key = document.querySelector(`.${item}`);
+          key.innerText = this.lettersLowerRu[item];
+        });
       }
       if (this.shiftIsDown) {
-        Object.keys(this.specialCharacters).forEach((item) => {
+        Object.keys(this.specialCharactersRu).forEach((item) => {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.specialCharactersShiftRu[item];
         });
@@ -335,8 +354,12 @@ class Keyboard {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.numbersShiftRu[item];
         });
+        Object.keys(this.lettersUpperRu).forEach((item) => {
+          const key = document.querySelector(`.${item}`);
+          key.innerText = this.lettersUpperRu[item];
+        });
       } else {
-        Object.keys(this.specialCharacters).forEach((item) => {
+        Object.keys(this.specialCharactersRu).forEach((item) => {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.specialCharactersRu[item];
         });
