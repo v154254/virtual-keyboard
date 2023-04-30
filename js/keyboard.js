@@ -147,7 +147,11 @@ class Keyboard {
   }
 
   identifyKeyDown(event) {
-    this.highlightAdd(event.code);
+    if (Object.keys(this.alphabet).includes(event.code.at(-1))) {
+      this.highlightAdd(event.code.at(-1).toLowerCase());
+    } else {
+      this.highlightAdd(event.code);
+    }
     switch (event.code) {
       case 'Enter':
         return;
@@ -245,7 +249,11 @@ class Keyboard {
 
   identifyKeyUp(event) {
     event.preventDefault();
-    this.highlightRemove(event.code);
+    if (Object.keys(this.alphabet).includes(event.code.at(-1))) {
+      this.highlightRemove(event.code.at(-1).toLowerCase());
+    } else {
+      this.highlightRemove(event.code);
+    }
     if (event.code === 'AltLeft' || event.code === 'ControlLeft') {
       this.nullifyLanguageKeys();
     }
