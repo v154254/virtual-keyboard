@@ -179,6 +179,9 @@ class Keyboard {
       this.switchLanguage();
     }
     if (event.code === 'ShiftLeft') {
+      if (this.shiftIsDown) {
+        return;
+      }
       this.toggleUpper();
       this.shiftIsDown = true;
       this.changeKeyboardLayout();
@@ -250,12 +253,15 @@ class Keyboard {
 
   switchLanguage() {
     if (this.language === 'ru') {
-      this.language = 'en';
-      this.changeKeyboardLayout();
+      this.setLanguage('en');
     } else {
-      this.language = 'ru';
-      this.changeKeyboardLayout();
+      this.setLanguage('ru');
     }
+  }
+
+  setLanguage(lang) {
+    this.language = lang;
+    this.changeKeyboardLayout();
   }
 
   identifyKeyUp(event) {
