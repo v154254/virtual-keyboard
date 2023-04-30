@@ -147,6 +147,7 @@ class Keyboard {
   }
 
   identifyKeyDown(event) {
+    this.highlightAdd(event.code);
     switch (event.code) {
       case 'Enter':
         return;
@@ -222,6 +223,16 @@ class Keyboard {
     }
   }
 
+  highlightAdd(key) {
+    this.target = document.querySelector(`.${key}`);
+    this.target.classList.add('highlight');
+  }
+
+  highlightRemove(key) {
+    this.target = document.querySelector(`.${key}`);
+    this.target.classList.remove('highlight');
+  }
+
   switchLanguage() {
     if (this.language === 'ru') {
       this.language = 'en';
@@ -234,6 +245,7 @@ class Keyboard {
 
   identifyKeyUp(event) {
     event.preventDefault();
+    this.highlightRemove(event.code);
     if (event.code === 'AltLeft' || event.code === 'ControlLeft') {
       this.nullifyLanguageKeys();
     }
@@ -277,6 +289,7 @@ class Keyboard {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.specialCharactersShift[item];
         });
+        document.querySelector('.Tab').innerText = 'Tab';
         Object.keys(this.numbers).forEach((item) => {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.numbersShift[item];
@@ -286,6 +299,7 @@ class Keyboard {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.specialCharacters[item];
         });
+        document.querySelector('.Tab').innerText = 'Tab';
         Object.keys(this.numbers).forEach((item) => {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.numbers[item];

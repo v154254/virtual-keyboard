@@ -53,17 +53,29 @@ function createMain() {
       ArrowDown: '▼',
       ArrowRight: '►',
     };
+    const specialKeys = {
+      MetaLeft: 'Win',
+      ShiftLeft: 'Shift',
+      ShiftRight: 'Shift',
+      ControlLeft: 'Ctrl',
+      AltLeft: 'Alt',
+      AltRight: 'Alt',
+      ControlRight: 'Ctrl',
+    };
     const firstRowKeys = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace'];
-    const secondRowKeys = ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'BracketLeft', 'BracketRight', 'Backslash', 'Del'];
+    const secondRowKeys = ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'BracketLeft', 'BracketRight', 'Backslash', 'Delete'];
     const thirdRowKeys = ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', 'Quote', 'Enter'];
-    const fourthRowKeys = ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Period', 'Slash', 'ArrowUp', 'Shift'];
-    const fifthRowKeys = ['Ctrl', 'Win', 'Alt', 'Space', 'Alt', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'Ctrl'];
+    const fourthRowKeys = ['ShiftLeft', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Period', 'Slash', 'ArrowUp', 'ShiftRight'];
+    const fifthRowKeys = ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'];
     function createRow(addRow, rowKeys) {
       rowKeys.forEach((item) => {
         const key = document.createElement('div');
         if (Object.keys(specialCharacters).includes(item)) {
           key.classList.add('key', `${item}`);
           key.innerText = `${specialCharacters[item]}`;
+        } else if (Object.keys(specialKeys).includes(item)) {
+          key.classList.add('key', `${item}`);
+          key.innerText = `${specialKeys[item]}`;
         } else {
           key.classList.add('key', `${item}`);
           key.innerText = `${item}`;
