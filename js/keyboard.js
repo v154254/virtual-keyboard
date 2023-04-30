@@ -49,6 +49,10 @@ class Keyboard {
       Period: '.',
       Slash: '/',
       Space: ' ',
+      ArrowUp: '▲',
+      ArrowLeft: '◄',
+      ArrowDown: '▼',
+      ArrowRight: '►',
     };
     this.numbers = {
       Digit0: '0',
@@ -75,6 +79,10 @@ class Keyboard {
       Period: '>',
       Slash: '?',
       Space: ' ',
+      ArrowUp: '▲',
+      ArrowLeft: '◄',
+      ArrowDown: '▼',
+      ArrowRight: '►',
     };
     this.numbersShift = {
       Digit0: ')',
@@ -101,6 +109,10 @@ class Keyboard {
       Period: 'ю',
       Slash: '.',
       Space: ' ',
+      ArrowUp: '▲',
+      ArrowLeft: '◄',
+      ArrowDown: '▼',
+      ArrowRight: '►',
     };
     this.specialCharactersShiftRu = {
       Backquote: 'Ё',
@@ -115,6 +127,10 @@ class Keyboard {
       Period: 'Ю',
       Slash: ',',
       Space: ' ',
+      ArrowUp: '▲',
+      ArrowLeft: '◄',
+      ArrowDown: '▼',
+      ArrowRight: '►',
     };
     this.numbersShiftRu = {
       Digit0: ')',
@@ -163,33 +179,33 @@ class Keyboard {
   typeSymbol(key) {
     this.textarea = document.querySelector('textarea');
     if (Object.keys(this.numbers).includes(key) && !this.shiftIsDown) {
-      this.textarea.value += this.numbers[key];
+      this.textarea.setRangeText(this.numbers[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       return;
     }
     if (this.language === 'en') {
       if (Object.keys(this.specialCharacters).includes(key) && !this.shiftIsDown) {
-        this.textarea.value += this.specialCharacters[key];
+        this.textarea.setRangeText(this.specialCharacters[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       } else if (Object.keys(this.specialCharacters).includes(key)) {
-        this.textarea.value += this.specialCharactersShift[key];
+        this.textarea.setRangeText(this.specialCharactersShift[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       } else if (Object.keys(this.numbers).includes(key)) {
-        this.textarea.value += this.numbersShift[key];
+        this.textarea.setRangeText(this.numbersShift[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       } else if (this.upperCase) {
-        this.textarea.value += key;
+        this.textarea.setRangeText(key, this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       } else {
-        this.textarea.value += key.toLowerCase();
+        this.textarea.setRangeText(key.toLowerCase(), this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       }
     }
     if (this.language === 'ru') {
       if (Object.keys(this.specialCharacters).includes(key) && !this.shiftIsDown) {
-        this.textarea.value += this.specialCharactersRu[key];
+        this.textarea.setRangeText(this.specialCharactersRu[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       } else if (Object.keys(this.specialCharacters).includes(key)) {
-        this.textarea.value += this.specialCharactersShiftRu[key];
+        this.textarea.setRangeText(this.specialCharactersShiftRu[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       } else if (Object.keys(this.numbers).includes(key)) {
-        this.textarea.value += this.numbersShiftRu[key];
+        this.textarea.setRangeText(this.numbersShiftRu[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       } else if (this.upperCase) {
-        this.textarea.value += this.alphabet[key];
+        this.textarea.setRangeText(this.alphabet[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       } else {
-        this.textarea.value += this.alphabet[key].toLowerCase();
+        this.textarea.setRangeText(this.alphabet[key].toLowerCase(), this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       }
     }
   }
