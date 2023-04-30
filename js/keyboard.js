@@ -48,11 +48,11 @@ class Keyboard {
       Comma: ',',
       Period: '.',
       Slash: '/',
-      Space: ' ',
       ArrowUp: '▲',
       ArrowLeft: '◄',
       ArrowDown: '▼',
       ArrowRight: '►',
+      Tab: '    ',
     };
     this.numbers = {
       Digit0: '0',
@@ -78,11 +78,11 @@ class Keyboard {
       Comma: '<',
       Period: '>',
       Slash: '?',
-      Space: ' ',
       ArrowUp: '▲',
       ArrowLeft: '◄',
       ArrowDown: '▼',
       ArrowRight: '►',
+      Tab: '    ',
     };
     this.numbersShift = {
       Digit0: ')',
@@ -108,11 +108,11 @@ class Keyboard {
       Comma: 'б',
       Period: 'ю',
       Slash: '.',
-      Space: ' ',
       ArrowUp: '▲',
       ArrowLeft: '◄',
       ArrowDown: '▼',
       ArrowRight: '►',
+      Tab: '    ',
     };
     this.specialCharactersShiftRu = {
       Backquote: 'Ё',
@@ -126,11 +126,11 @@ class Keyboard {
       Comma: 'Б',
       Period: 'Ю',
       Slash: ',',
-      Space: ' ',
       ArrowUp: '▲',
       ArrowLeft: '◄',
       ArrowDown: '▼',
       ArrowRight: '►',
+      Tab: '    ',
     };
     this.numbersShiftRu = {
       Digit0: ')',
@@ -147,6 +147,18 @@ class Keyboard {
   }
 
   identifyKeyDown(event) {
+    switch (event.code) {
+      case 'Enter':
+        return;
+      case 'Space':
+        return;
+      case 'Delete':
+        return;
+      case 'Backspace':
+        return;
+      default:
+        event.preventDefault();
+    }
     event.preventDefault();
     if (event.code === 'AltLeft') {
       this.languageKeys.alt = true;
