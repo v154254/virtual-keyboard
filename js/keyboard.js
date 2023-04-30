@@ -330,6 +330,7 @@ class Keyboard {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.specialCharactersShiftRu[item];
         });
+        document.querySelector('.Tab').innerText = 'Tab';
         Object.keys(this.numbers).forEach((item) => {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.numbersShiftRu[item];
@@ -339,6 +340,7 @@ class Keyboard {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.specialCharactersRu[item];
         });
+        document.querySelector('.Tab').innerText = 'Tab';
         Object.keys(this.numbers).forEach((item) => {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.numbers[item];
