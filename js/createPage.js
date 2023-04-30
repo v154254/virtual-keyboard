@@ -25,8 +25,17 @@ function createMain() {
   container.appendChild(textArea);
   container.appendChild(keyboard);
   function createKeyboard() {
-    const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const specialCharacters = {
+      Digit0: '0',
+      Digit1: '1',
+      Digit2: '2',
+      Digit3: '3',
+      Digit4: '4',
+      Digit5: '5',
+      Digit6: '6',
+      Digit7: '7',
+      Digit8: '8',
+      Digit9: '9',
       Backquote: '`',
       Minus: '-',
       Equal: '=',
@@ -44,18 +53,15 @@ function createMain() {
       ArrowDown: '▼',
       ArrowRight: '►',
     };
-    const firstRowKeys = ['Backquote', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Minus', 'Equal', 'Backspace'];
-    const secondRowKeys = ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'BracketLeft', 'BracketRight', 'Backslash', 'Del'];
-    const thirdRowKeys = ['CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Semicolon', 'Quote', 'Enter'];
-    const fourthRowKeys = ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Comma', 'Period', 'Slash', 'ArrowUp', 'Shift'];
+    const firstRowKeys = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace'];
+    const secondRowKeys = ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'BracketLeft', 'BracketRight', 'Backslash', 'Del'];
+    const thirdRowKeys = ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', 'Quote', 'Enter'];
+    const fourthRowKeys = ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Period', 'Slash', 'ArrowUp', 'Shift'];
     const fifthRowKeys = ['Ctrl', 'Win', 'Alt', 'Space', 'Alt', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'Ctrl'];
     function createRow(addRow, rowKeys) {
       rowKeys.forEach((item) => {
         const key = document.createElement('div');
-        if (digits.includes(item)) {
-          key.classList.add('key', `d${item}`);
-          key.innerText = `${item}`;
-        } else if (Object.keys(specialCharacters).includes(item)) {
+        if (Object.keys(specialCharacters).includes(item)) {
           key.classList.add('key', `${item}`);
           key.innerText = `${specialCharacters[item]}`;
         } else {

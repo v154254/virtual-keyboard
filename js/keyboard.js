@@ -1,6 +1,6 @@
 class Keyboard {
   constructor() {
-    this.language = 'ru';
+    this.language = 'en';
     this.languageKeys = {
       ctrl: false,
       alt: false,
@@ -8,47 +8,7 @@ class Keyboard {
     this.upperCase = false;
     this.shiftIsDown = false;
     this.specialKeys = ['AltLeft', 'ControlLeft', 'ShiftLeft', 'CapsLock'];
-    this.digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    this.specialSymbols = {
-      '[': '{',
-      ']': '}',
-      ';': ':',
-      '\'': '"',
-      ',': '<',
-      '.': '>',
-      '/': '?',
-      '`': '~',
-      1: '!',
-      2: '@',
-      3: '#',
-      4: '$',
-      5: '%',
-      6: '^',
-      7: '&',
-      8: '*',
-      9: '(',
-      0: ')',
-      '-': '_',
-      '=': '+',
-      '\\': '|',
-    };
-    this.specialSymbolsRu = {
-      1: '!',
-      2: '"',
-      3: '№',
-      4: ';',
-      5: '%',
-      6: ':',
-      7: '?',
-      8: '*',
-      9: '(',
-      0: ')',
-      '-': '_',
-      '=': '+',
-      '\\': '/',
-      '/': ',',
-    };
-    this.ruAlphabet = {
+    this.alphabet = {
       Q: 'Й',
       W: 'Ц',
       E: 'У',
@@ -59,8 +19,6 @@ class Keyboard {
       I: 'Ш',
       O: 'Щ',
       P: 'З',
-      '[': 'Х',
-      ']': 'Ъ',
       A: 'Ф',
       S: 'Ы',
       D: 'В',
@@ -70,8 +28,6 @@ class Keyboard {
       J: 'О',
       K: 'Л',
       L: 'Д',
-      ';': 'Ж',
-      '\'': 'Э',
       Z: 'Я',
       X: 'Ч',
       C: 'С',
@@ -79,23 +35,98 @@ class Keyboard {
       B: 'И',
       N: 'Т',
       M: 'Ь',
-      ',': 'Б',
-      '.': 'Ю',
-      '/': '.',
-      1: '1',
-      2: '2',
-      3: '3',
-      4: '4',
-      5: '5',
-      6: '6',
-      7: '7',
-      8: '8',
-      9: '9',
-      0: '0',
-      '-': '-',
-      '=': '=',
-      '\\': '\\',
-      '`': 'Ё',
+    };
+    this.specialCharacters = {
+      Backquote: '`',
+      Minus: '-',
+      Equal: '=',
+      BracketLeft: '[',
+      BracketRight: ']',
+      Backslash: '\\',
+      Semicolon: ';',
+      Quote: '\'',
+      Comma: ',',
+      Period: '.',
+      Slash: '/',
+      Space: ' ',
+    };
+    this.numbers = {
+      Digit0: '0',
+      Digit1: '1',
+      Digit2: '2',
+      Digit3: '3',
+      Digit4: '4',
+      Digit5: '5',
+      Digit6: '6',
+      Digit7: '7',
+      Digit8: '8',
+      Digit9: '9',
+    };
+    this.specialCharactersShift = {
+      Backquote: '~',
+      Minus: '_',
+      Equal: '+',
+      BracketLeft: '{',
+      BracketRight: '}',
+      Backslash: '|',
+      Semicolon: ':',
+      Quote: '"',
+      Comma: '<',
+      Period: '>',
+      Slash: '?',
+      Space: ' ',
+    };
+    this.numbersShift = {
+      Digit0: ')',
+      Digit1: '!',
+      Digit2: '@',
+      Digit3: '#',
+      Digit4: '$',
+      Digit5: '%',
+      Digit6: '^',
+      Digit7: '&',
+      Digit8: '*',
+      Digit9: '(',
+    };
+    this.specialCharactersRu = {
+      Backquote: 'ё',
+      Minus: '-',
+      Equal: '=',
+      BracketLeft: 'х',
+      BracketRight: 'ъ',
+      Backslash: '\\',
+      Semicolon: 'ж',
+      Quote: 'э',
+      Comma: 'б',
+      Period: 'ю',
+      Slash: '.',
+      Space: ' ',
+    };
+    this.specialCharactersShiftRu = {
+      Backquote: 'Ё',
+      Minus: '_',
+      Equal: '+',
+      BracketLeft: 'Х',
+      BracketRight: 'Ъ',
+      Backslash: '/',
+      Semicolon: 'Ж',
+      Quote: 'Э',
+      Comma: 'Б',
+      Period: 'Ю',
+      Slash: ',',
+      Space: ' ',
+    };
+    this.numbersShiftRu = {
+      Digit0: ')',
+      Digit1: '!',
+      Digit2: '"',
+      Digit3: '№',
+      Digit4: ';',
+      Digit5: '%',
+      Digit6: ':',
+      Digit7: '?',
+      Digit8: '*',
+      Digit9: '(',
     };
   }
 
@@ -120,67 +151,45 @@ class Keyboard {
     if (this.specialKeys.includes(event.code)) {
       return;
     }
-    switch (event.code) {
-      case 'BracketLeft':
-        this.typeSymbol('[');
-        break;
-      case 'BracketRight':
-        this.typeSymbol(']');
-        break;
-      case 'Semicolon':
-        this.typeSymbol(';');
-        break;
-      case 'Quote':
-        this.typeSymbol('\'');
-        break;
-      case 'Comma':
-        this.typeSymbol(',');
-        break;
-      case 'Period':
-        this.typeSymbol('.');
-        break;
-      case 'Slash':
-        this.typeSymbol('/');
-        break;
-      case 'Backquote':
-        this.typeSymbol('`');
-        break;
-      case 'Minus':
-        this.typeSymbol('-');
-        break;
-      case 'Equal':
-        this.typeSymbol('=');
-        break;
-      case 'Backslash':
-        this.typeSymbol('\\');
-        break;
-      default:
-        this.typeSymbol(event.code.at(-1));
-        break;
+    if (Object.keys(this.specialCharacters).includes(event.code)
+      || Object.keys(this.numbers).includes(event.code)) {
+      this.typeSymbol(event.code);
+      return;
     }
+    this.typeSymbol(event.code.at(-1));
   }
 
   typeSymbol(key) {
     this.textarea = document.querySelector('textarea');
-    if (this.language === 'ru') {
-      if (this.shiftIsDown && Object.keys(this.specialSymbolsRu).includes(key)) {
-        this.textarea.value += this.specialSymbolsRu[key];
-        return;
+    if (Object.keys(this.numbers).includes(key) && !this.shiftIsDown) {
+      this.textarea.value += this.numbers[key];
+      return;
+    }
+    if (this.language === 'en') {
+      if (Object.keys(this.specialCharacters).includes(key) && !this.shiftIsDown) {
+        this.textarea.value += this.specialCharacters[key];
+      } else if (Object.keys(this.specialCharacters).includes(key)) {
+        this.textarea.value += this.specialCharactersShift[key];
+      } else if (Object.keys(this.numbers).includes(key)) {
+        this.textarea.value += this.numbersShift[key];
+      } else if (this.upperCase) {
+        this.textarea.value += key;
+      } else {
+        this.textarea.value += key.toLowerCase();
       }
-      if (this.upperCase === true) {
-        this.textarea.value += this.ruAlphabet[key];
-        return;
-      } this.textarea.value += this.ruAlphabet[key].toLowerCase();
-      return;
     }
-    if (this.shiftIsDown && Object.keys(this.specialSymbols).includes(key)) {
-      this.textarea.value += this.specialSymbols[key];
-      return;
-    }
-    if (this.upperCase === true) {
-      this.textarea.value += key;
-    } else {
-      this.textarea.value += key.toLowerCase();
+    if (this.language === 'ru') {
+      if (Object.keys(this.specialCharacters).includes(key) && !this.shiftIsDown) {
+        this.textarea.value += this.specialCharactersRu[key];
+      } else if (Object.keys(this.specialCharacters).includes(key)) {
+        this.textarea.value += this.specialCharactersShiftRu[key];
+      } else if (Object.keys(this.numbers).includes(key)) {
+        this.textarea.value += this.numbersShiftRu[key];
+      } else if (this.upperCase) {
+        this.textarea.value += this.alphabet[key];
+      } else {
+        this.textarea.value += this.alphabet[key].toLowerCase();
+      }
     }
   }
 
