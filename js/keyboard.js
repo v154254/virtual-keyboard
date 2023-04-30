@@ -144,6 +144,7 @@ class Keyboard {
     if (event.code === 'ShiftLeft') {
       this.toggleUpper();
       this.shiftIsDown = true;
+      this.changeKeyboardLayout();
     }
     if (event.code === 'CapsLock') {
       this.toggleUpper();
@@ -196,8 +197,10 @@ class Keyboard {
   switchLanguage() {
     if (this.language === 'ru') {
       this.language = 'en';
+      this.changeKeyboardLayout();
     } else {
       this.language = 'ru';
+      this.changeKeyboardLayout();
     }
   }
 
@@ -209,6 +212,7 @@ class Keyboard {
     if (event.code === 'ShiftLeft') {
       this.shiftIsDown = false;
       this.toggleUpper();
+      this.changeKeyboardLayout();
     }
   }
 
@@ -224,6 +228,72 @@ class Keyboard {
       this.upperCase = false;
     } else {
       this.upperCase = true;
+    }
+  }
+
+  changeKeyboardLayout() {
+    if (this.language === 'en') {
+      if (this.upperCase) {
+        Object.keys(this.alphabet).forEach((item) => {
+          const key = document.querySelector(`.${item.toLowerCase()}`);
+          key.innerText = item.toUpperCase();
+        });
+      } else {
+        Object.keys(this.alphabet).forEach((item) => {
+          const key = document.querySelector(`.${item.toLowerCase()}`);
+          key.innerText = item.toLowerCase();
+        });
+      }
+      if (this.shiftIsDown) {
+        Object.keys(this.specialCharacters).forEach((item) => {
+          const key = document.querySelector(`.${item}`);
+          key.innerText = this.specialCharactersShift[item];
+        });
+        Object.keys(this.numbers).forEach((item) => {
+          const key = document.querySelector(`.${item}`);
+          key.innerText = this.numbersShift[item];
+        });
+      } else {
+        Object.keys(this.specialCharacters).forEach((item) => {
+          const key = document.querySelector(`.${item}`);
+          key.innerText = this.specialCharacters[item];
+        });
+        Object.keys(this.numbers).forEach((item) => {
+          const key = document.querySelector(`.${item}`);
+          key.innerText = this.numbers[item];
+        });
+      }
+    } else {
+      if (this.upperCase) {
+        Object.keys(this.alphabet).forEach((item) => {
+          const key = document.querySelector(`.${item.toLowerCase()}`);
+          key.innerText = this.alphabet[item].toUpperCase();
+        });
+      } else {
+        Object.keys(this.alphabet).forEach((item) => {
+          const key = document.querySelector(`.${item.toLowerCase()}`);
+          key.innerText = this.alphabet[item].toLowerCase();
+        });
+      }
+      if (this.shiftIsDown) {
+        Object.keys(this.specialCharacters).forEach((item) => {
+          const key = document.querySelector(`.${item}`);
+          key.innerText = this.specialCharactersShiftRu[item];
+        });
+        Object.keys(this.numbers).forEach((item) => {
+          const key = document.querySelector(`.${item}`);
+          key.innerText = this.numbersShiftRu[item];
+        });
+      } else {
+        Object.keys(this.specialCharacters).forEach((item) => {
+          const key = document.querySelector(`.${item}`);
+          key.innerText = this.specialCharactersRu[item];
+        });
+        Object.keys(this.numbers).forEach((item) => {
+          const key = document.querySelector(`.${item}`);
+          key.innerText = this.numbers[item];
+        });
+      }
     }
   }
 }
