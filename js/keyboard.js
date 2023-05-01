@@ -198,11 +198,12 @@ class Keyboard {
 
   identifyMouseDown(event) {
     const keys = Array.from(document.querySelectorAll('.key'));
-    const target = event.target.innerText;
     if (!keys.includes(event.target)) {
       return;
     }
     event.preventDefault();
+    this.highlightAddClick(event.target);
+    const target = event.target.innerText;
     this.textarea = document.querySelector('textarea');
     if (target === 'Shift') {
       if (this.shiftIsDown) {
@@ -239,6 +240,17 @@ class Keyboard {
       this.toggleUpper();
       this.changeKeyboardLayout();
     }
+  }
+
+  highlightAddClick(event) {
+    this.target = event;
+    this.target.classList.add('highlight');
+    this.target.addEventListener('mouseleave', this.removeHighlightClick);
+  }
+
+  removeHighlightClick(event) {
+    this.target = event.target;
+    this.target.classList.remove('highlight');
   }
 
   typeSymbol(key) {
