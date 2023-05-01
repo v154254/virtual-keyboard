@@ -275,7 +275,7 @@ class Keyboard {
     } else {
       this.highlightRemove(event.code);
     }
-    if (event.code === 'AltLeft' || event.code === 'ControlLeft') {
+    if (event.code === 'AltLeft' || event.code === 'ControlLeft' || event.code === 'AltRight' || event.code === 'ControlRight') {
       this.nullifyLanguageKeys();
     }
     if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
