@@ -1,0 +1,95 @@
+.container {
+  margin: 0 auto;
+}
+
+.keyboard {
+  width: 904px;
+  margin: 0 auto;
+  padding: 5px;
+  padding-left: 0;
+  padding-bottom: 0;
+  background: #888888;
+  border: 3px solid #222222;
+  border-radius: 5px;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.key {
+  width: 65px;
+  height: 40px;
+  margin-left: 6px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: center;
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.3s;
+}
+
+.Backspace,
+.ShiftLeft,
+.ShiftRight {
+  width: 151px;
+}
+
+.CapsLock {
+  width: 85px;
+}
+
+.Space {
+  width: 500px;
+}
+
+.Tab {
+  width: 50px;
+}
+
+.Del {
+  width: 44px;
+}
+
+.Enter {
+  width: 125px;
+}
+
+.highlight {
+  position: relative;
+  top: 3px;
+  background-color: #ee82ee;
+}
+
+.main__textarea {
+  display: block;
+  width: 700px;
+  height: 200px;
+  margin: 10px auto 10px;
+  padding: 10px;
+  font-size: 18px;
+  color: #444444;
+}
+
+.title {
+  margin: 10px auto;
+  text-align: center;
+}
+
+.description {
+  font-size: 32px;
+  text-align: center;
+}
+
+.language {
+  font-size: 32px;
+  text-align: center;
+}
+
+/*# sourceMappingURL=style.css.map */
