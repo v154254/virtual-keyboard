@@ -7,6 +7,11 @@ class Keyboard {
     };
     this.upperCase = false;
     this.shiftIsDown = false;
+    this.formattingKeys = {
+      Enter: '\n',
+      Tab: '    ',
+      Space: ' ',
+    };
     this.specialKeys = ['AltLeft', 'ControlLeft', 'ShiftLeft', 'CapsLock', 'MetaLeft', 'ShiftRight', 'AltRight', 'ControlRight'];
     this.alphabet = {
       Q: 'Й',
@@ -52,7 +57,6 @@ class Keyboard {
       ArrowLeft: '◄',
       ArrowDown: '▼',
       ArrowRight: '►',
-      Tab: '    ',
     };
     this.numbers = {
       Digit0: '0',
@@ -82,7 +86,6 @@ class Keyboard {
       ArrowLeft: '◄',
       ArrowDown: '▼',
       ArrowRight: '►',
-      Tab: '    ',
     };
     this.numbersShift = {
       Digit0: ')',
@@ -105,7 +108,6 @@ class Keyboard {
       ArrowLeft: '◄',
       ArrowDown: '▼',
       ArrowRight: '►',
-      Tab: '    ',
     };
     this.specialCharactersShiftRu = {
       Minus: '_',
@@ -116,7 +118,6 @@ class Keyboard {
       ArrowLeft: '◄',
       ArrowDown: '▼',
       ArrowRight: '►',
-      Tab: '    ',
     };
     this.lettersUpperRu = {
       Backquote: 'Ё',
@@ -151,22 +152,11 @@ class Keyboard {
   }
 
   identifyKeyDown(event) {
+    event.preventDefault();
     if (Object.keys(this.alphabet).includes(event.code.at(-1))) {
       this.highlightAdd(event.code.at(-1).toLowerCase());
     } else {
       this.highlightAdd(event.code);
-    }
-    switch (event.code) {
-      case 'Enter':
-        return;
-      case 'Space':
-        return;
-      case 'Delete':
-        return;
-      case 'Backspace':
-        return;
-      default:
-        event.preventDefault();
     }
     event.preventDefault();
     if (event.code === 'AltLeft' || event.code === 'AltRight') {
@@ -193,6 +183,10 @@ class Keyboard {
     if (this.specialKeys.includes(event.code)) {
       return;
     }
+    if (Object.keys(this.formattingKeys).includes(event.code) || event.code === 'Delete' || event.code === 'Backspace') {
+      this.typeSymbol(event.code);
+      return;
+    }
     if (Object.keys(this.specialCharacters).includes(event.code)
       || Object.keys(this.numbers).includes(event.code)) {
       this.typeSymbol(event.code);
@@ -203,8 +197,21 @@ class Keyboard {
 
   typeSymbol(key) {
     this.textarea = document.querySelector('textarea');
+    if (Object.keys(this.formattingKeys).includes(key)) {
+      this.textarea.setRangeText(this.formattingKeys[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
+      return;
+    }
     if (Object.keys(this.numbers).includes(key) && !this.shiftIsDown) {
       this.textarea.setRangeText(this.numbers[key], this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
+      return;
+    }
+    if (key === 'Delete') {
+      this.textarea.setRangeText('', this.textarea.selectionStart, this.textarea.selectionStart + 1, 'start');
+      return;
+    }
+    if (key === 'Backspace') {
+      this.textarea.setSelectionRange(this.textarea.selectionStart, this.textarea.selectionStart - 1, 'backward');
+      this.textarea.setRangeText('', this.textarea.selectionStart, this.textarea.selectionEnd + 1, 'end');
       return;
     }
     if (this.language === 'en') {
@@ -318,7 +325,6 @@ class Keyboard {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.specialCharactersShift[item];
         });
-        document.querySelector('.Tab').innerText = 'Tab';
         Object.keys(this.numbers).forEach((item) => {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.numbersShift[item];
@@ -328,7 +334,6 @@ class Keyboard {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.specialCharacters[item];
         });
-        document.querySelector('.Tab').innerText = 'Tab';
         Object.keys(this.numbers).forEach((item) => {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.numbers[item];
@@ -359,7 +364,6 @@ class Keyboard {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.specialCharactersShiftRu[item];
         });
-        document.querySelector('.Tab').innerText = 'Tab';
         Object.keys(this.numbers).forEach((item) => {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.numbersShiftRu[item];
@@ -373,7 +377,6 @@ class Keyboard {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.specialCharactersRu[item];
         });
-        document.querySelector('.Tab').innerText = 'Tab';
         Object.keys(this.numbers).forEach((item) => {
           const key = document.querySelector(`.${item}`);
           key.innerText = this.numbers[item];
