@@ -1,11 +1,15 @@
 .Backspace,
-.CapsLock,
-.Shift {
-  width: 100px;
+.ShiftLeft,
+.ShiftRight {
+  width: 151px;
+}
+
+.CapsLock {
+  width: 85px;
 }
 
 .Space {
-  width: 330px;
+  width: 500px;
 }
 
 .Tab {
@@ -17,7 +21,7 @@
 }
 
 .Enter {
-  width: 86px;
+  width: 125px;
 }
 
 .highlight {
