@@ -178,7 +178,7 @@ class Keyboard {
     if (this.languageKeys.alt && this.languageKeys.ctrl) {
       this.switchLanguage();
     }
-    if (event.code === 'ShiftLeft') {
+    if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
       if (this.shiftIsDown) {
         return;
       }
@@ -278,7 +278,7 @@ class Keyboard {
     if (event.code === 'AltLeft' || event.code === 'ControlLeft') {
       this.nullifyLanguageKeys();
     }
-    if (event.code === 'ShiftLeft') {
+    if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
       this.shiftIsDown = false;
       this.toggleUpper();
       this.changeKeyboardLayout();
