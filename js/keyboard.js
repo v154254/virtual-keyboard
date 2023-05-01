@@ -233,7 +233,8 @@ class Keyboard {
     }
   }
 
-  identifyMouseUp() {
+  identifyMouseUp(event) {
+    this.removeHighlightClick(event);
     if (this.shiftIsClick) {
       this.shiftIsDown = false;
       this.shiftIsClick = false;
