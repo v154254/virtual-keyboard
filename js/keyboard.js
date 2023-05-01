@@ -7,6 +7,7 @@ class Keyboard {
     };
     this.upperCase = false;
     this.shiftIsDown = false;
+    this.shiftIsClick = false;
     this.formattingKeys = {
       Enter: '\n',
       Tab: '    ',
@@ -195,6 +196,51 @@ class Keyboard {
     this.typeSymbol(event.code.at(-1));
   }
 
+  identifyMouseDown(event) {
+    const keys = Array.from(document.querySelectorAll('.key'));
+    const target = event.target.innerText;
+    if (!keys.includes(event.target)) {
+      return;
+    }
+    event.preventDefault();
+    this.textarea = document.querySelector('textarea');
+    if (target === 'Shift') {
+      if (this.shiftIsDown) {
+        return;
+      }
+      this.shiftIsClick = true;
+      this.toggleUpper();
+      this.shiftIsDown = true;
+      this.changeKeyboardLayout();
+    }
+    if (target === 'CapsLock') {
+      this.toggleUpper();
+      this.changeKeyboardLayout();
+    }
+    if (this.specialKeys.includes(target) || target === 'Ctrl'
+     || target === 'Alt' || target === 'Win' || target === 'Shift') {
+      return;
+    }
+    if (Object.keys(this.formattingKeys).includes(target) || target === 'Delete' || target === 'Backspace') {
+      this.typeSymbol(target);
+    } else if (target === '') {
+      this.textarea = document.querySelector('textarea');
+      this.textarea.setRangeText(' ', this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
+    } else {
+      this.textarea = document.querySelector('textarea');
+      this.textarea.setRangeText(target, this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
+    }
+  }
+
+  identifyMouseUp() {
+    if (this.shiftIsClick) {
+      this.shiftIsDown = false;
+      this.shiftIsClick = false;
+      this.toggleUpper();
+      this.changeKeyboardLayout();
+    }
+  }
+
   typeSymbol(key) {
     this.textarea = document.querySelector('textarea');
     if (Object.keys(this.formattingKeys).includes(key)) {
@@ -206,7 +252,7 @@ class Keyboard {
       return;
     }
     if (key === 'Delete') {
-      this.textarea.setRangeText('', this.textarea.selectionStart, this.textarea.selectionStart + 1, 'start');
+      this.textarea.setRangeText('', this.textarea.selectionStart, this.textarea.selectionEnd + 1, 'start');
       return;
     }
     if (key === 'Backspace') {

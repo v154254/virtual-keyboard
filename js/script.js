@@ -16,3 +16,5 @@ window.addEventListener('load', getLocalStorage);
 window.addEventListener('beforeunload', setLocalStorage);
 window.addEventListener('keydown', keyboard.identifyKeyDown.bind(keyboard));
 window.addEventListener('keyup', keyboard.identifyKeyUp.bind(keyboard));
+window.addEventListener('mousedown', keyboard.identifyMouseDown.bind(keyboard));
+window.addEventListener('mouseup', keyboard.identifyMouseUp.bind(keyboard));
